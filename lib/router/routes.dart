@@ -6,5 +6,5 @@ import 'package:meme_generator_application/presentation/slide_version/slide_vers
 List<GetPage> getPages = [
   GetPage(name: DashboardPage.TAG, page: () => DashboardPage()),
   GetPage(name: SlideVersionPage.TAG, page: () => SlideVersionPage()),
-  GetPage(name: RandomVersionPage.TAG, page: () => RandomVersionPage()),
+  GetPage(name: RandomVersionPage.TAG, page: () => RandomVersionPage(),),
 ];

@@ -10,7 +10,19 @@ class _SlideVersionPageState extends State<SlideVersionPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Slide"),),
+      appBar: AppBar(
+        title: Text("Slide"),
+      ),
+      body: Container(
+        child: PageView.builder(itemBuilder: (context, index) {
+          return Center(
+            child: Text(
+              "Data ke " + index.toString(),
+              style: TextStyle(fontSize: 40),
+            ),
+          );
+        }),
+      ),
     );
   }
 }
