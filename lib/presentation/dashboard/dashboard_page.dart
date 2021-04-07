@@ -65,36 +65,39 @@ class BuildCardFeature extends StatelessWidget {
   final String title;
   @override
   Widget build(BuildContext context) {
-    return Container(
-        width: double.infinity,
-        height: 180,
-        margin: EdgeInsets.all(10),
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-                color: Colors.grey[400],
-                blurRadius: 3,
-                spreadRadius: 3,
-                offset: Offset(5, 5))
-          ],
-          borderRadius: BorderRadius.circular(8),
-          image: DecorationImage(
-            image: AssetImage(assetImage),
-            fit: BoxFit.fitWidth,
+    return InkWell(
+      onTap: () {},
+      child: Container(
+          width: double.infinity,
+          height: 180,
+          margin: EdgeInsets.all(10),
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey[400],
+                  blurRadius: 3,
+                  spreadRadius: 3,
+                  offset: Offset(5, 5))
+            ],
+            borderRadius: BorderRadius.circular(8),
+            image: DecorationImage(
+              image: AssetImage(assetImage),
+              fit: BoxFit.fitWidth,
+            ),
+            color: Colors.white,
           ),
-          color: Colors.white,
-        ),
-        child: Container(
-          margin: EdgeInsets.symmetric(horizontal: 20),
-          alignment: Alignment.centerRight,
-          child: Text(
-            title,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 30,
-                fontWeight: FontWeight.bold,
-                color: Colors.white54),
-          ),
-        ));
+          child: Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            alignment: Alignment.centerRight,
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                  fontSize: 30,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white54),
+            ),
+          )),
+    );
   }
 }
