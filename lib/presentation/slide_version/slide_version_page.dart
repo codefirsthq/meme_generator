@@ -9,6 +9,8 @@ class SlideVersionPage extends StatefulWidget {
 class _SlideVersionPageState extends State<SlideVersionPage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(title: Text("Slide"),),
+    );
   }
 }
