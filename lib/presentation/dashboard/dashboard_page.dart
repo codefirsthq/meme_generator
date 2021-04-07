@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
+import 'package:meme_generator_application/presentation/slide_version/slide_version_page.dart';
 
 class DashboardPage extends StatefulWidget {
+  static final String TAG = '/dashboard_page';
   @override
   _DashboardPageState createState() => _DashboardPageState();
 }
@@ -66,7 +69,9 @@ class BuildCardFeature extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Get.toNamed(SlideVersionPage.TAG);
+      },
       child: Container(
           width: double.infinity,
           height: 180,
