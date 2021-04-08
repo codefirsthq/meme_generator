@@ -2,7 +2,10 @@ import 'dart:math';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:get/route_manager.dart';
 import 'package:meme_generator_application/domain/meme/meme_data_model.dart';
+import 'package:meme_generator_application/infrastructure/meme/meme_repository.dart';
+import 'package:meme_generator_application/presentation/photo_view/photo_view_page.dart';
 
 class SlideVersionPage extends StatefulWidget {
   static final String TAG = '/slide_version_page';
@@ -11,18 +14,8 @@ class SlideVersionPage extends StatefulWidget {
 }
 
 class _SlideVersionPageState extends State<SlideVersionPage> {
-  Future<MemeDataModel> getComicAt(int page) async {
-    Response response;
-    Dio dio = Dio();
-
-    try {
-      response = await dio.get("https://xkcd.com/${page}/info.0.json");
-      var _data = MemeDataModel.fromJson(response.data);
-      return _data;
-    } catch (e) {}
-  }
-
   Random rnd = Random();
+  MemeRepository memeRepository = MemeRepository();
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +27,7 @@ class _SlideVersionPageState extends State<SlideVersionPage> {
         child: PageView.builder(
           itemBuilder: (context, index) {
             return FutureBuilder<MemeDataModel>(
-              future: getComicAt(rnd.nextInt(2445) + 1),
+              future: memeRepository.getComicAt(rnd.nextInt(2445) + 1),
               builder: (context, snapshot) {
                 switch (snapshot.connectionState) {
                   case ConnectionState.waiting:
@@ -57,12 +50,41 @@ class _SlideVersionPageState extends State<SlideVersionPage> {
     );
   }
 
-  Center doneState(MemeDataModel dataModel) {
-    return Center(
-        child: Text(
-      dataModel.img,
-      style: TextStyle(fontSize: 40),
-    ));
+  Widget doneState(MemeDataModel data) {
+    return SingleChildScrollView(
+      child: InkWell(
+        onTap: () {
+          print(data.img);
+          Get.toNamed(PhotoViewPage.TAG, arguments: data.img);
+        },
+        child: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+                child: Text(
+                  data.title,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                ),
+              ),
+              Image.network(
+                data.img,
+              ),
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                child: Text(
+                  data.alt,
+                  style: TextStyle(
+                    fontSize: 16,
+                  ),
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   Center defaultState() {
